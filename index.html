@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projeto gsap</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Carregue ambos com defer (mantém a ordem) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <section class="section hero"></section>
+            <section class="section section-1"></section>
+            <section class="section section-2"></section>
+        </div>
+        <div class="image-container">
+            <img src="frente.png" alt="image">
+        </div>
+    </div>
+
+    <script>
+        // roda quando o DOM estiver pronto (depois dos scripts defer)
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.wrapper',
+                    start: '25px',
+                    end: '500px',
+                    pin: true,
+                    scrub: true,
+                    markers: true
+                }
+            });
+
+            tl.to('.image-container img', {
+                scale: 6,
+                transformOrigin: 'center center',
+                ease: 'power1.inOut'
+            })
+                .to('.section.hero', {
+                    scale: 1.1,
+                    transformOrigin: 'center center',
+                    ease: 'power1.inOut'
+                }, '<');
+        });
+    </script>
+</body>
+
+</html>
